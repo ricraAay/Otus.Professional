@@ -13,10 +13,10 @@
                     Console.WriteLine($"Наименование файла: {arg.Name}");
                 };
 
-                fileFound.Found();
+                var cancellationTokenSource = new CancellationTokenSource();
 
                 // Вызов метода с условие для остановки поиска
-                // fileFound.Found(predicate: (name => name == "photo.jpg"));
+                fileFound.Found(cancellationTokenSource.Token);
             }
             catch (Exception ex)
             {

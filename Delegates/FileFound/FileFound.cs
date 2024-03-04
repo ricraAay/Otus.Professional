@@ -11,8 +11,9 @@
         /// Поиск файлов по указанному пути
         /// </summary>
         /// <param name="path">Путь</param>
+        /// <param name="cancellationToken">Токен отмены</param>
         /// <exception cref="Exception">Исключение при возникновении ошибки</exception>
-        public void Found(string? path = default, Func<string, bool>? predicate = default)
+        public void Found(CancellationToken cancellationToken, string? path = default)
         {
             if (FileFoundEvent == null)
             {
@@ -41,7 +42,7 @@
             {
                 var fileName = entry.Replace($"{path}", string.Empty);
 
-                if (predicate != null && predicate(fileName))
+                if (cancellationToken.IsCancellationRequested)
                 {
                     break;
                 }
