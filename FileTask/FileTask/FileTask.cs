@@ -2,7 +2,7 @@
 {
     public class FileTask
     {
-        public static async IAsyncEnumerable<Task<string>> CountTheNumberOfSpacesAsync(string path)
+        public static async IAsyncEnumerable<(string, int)> CountTheNumberOfSpacesAsync(string path)
         {
             var fileEntries = Directory.GetFiles(path);
 
@@ -13,7 +13,7 @@
                 var fileName = entry.Replace($"{path}\\", string.Empty);
                 var chars = Array.FindAll(text.ToCharArray(), chr => chr == ' ');
 
-                yield return Task.Run(() => $"Наименование файла: {fileName}, количество пробелов: {chars.Length}");
+                yield return (fileName, chars.Length);
             }
         }
     }

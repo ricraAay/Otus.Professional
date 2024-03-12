@@ -8,11 +8,15 @@ namespace FileTask
         {
             var stopWatch = new Stopwatch();
 
-            await foreach (var value in FileTask.CountTheNumberOfSpacesAsync(Log.WriteReadLine("Укажите путь: ")))
+            Console.Write("Укажите путь: ");
+
+            var path = Console.ReadLine();
+
+            await foreach (var value in FileTask.CountTheNumberOfSpacesAsync(path))
             {
                 stopWatch.Start();
 
-                Console.WriteLine($"{stopWatch} - {value.Result}");
+                Console.WriteLine($"{stopWatch} - Наименование файла: {value.Item1}, количество пробелов: {value.Item2}");
 
                 stopWatch.Restart();
             }
